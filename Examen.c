@@ -16,10 +16,11 @@
 #use rs232(baud=9600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8)
 
 #int_timer0
-
-void timer0
+int count = 0;
+void timer0()
 {
-
+   count = 1;
+   set_timer0(15536);
 }
 
 unsigned char cadena[20];
@@ -36,8 +37,8 @@ void main()
     enable_interrupts(INT_TIMER0);
     enable_interrupts(GLOBAL);
     set_tris_a(0x00); 
+    int mos=0,repe=0;
     int i,j,k;
-    int mos=0;
     printf("\fIngresa los datos de la forma [palabra 3-10][espacio][numero escrito]:");
     while(TRUE)
     {
@@ -45,8 +46,13 @@ void main()
         if(kbhit())
         {
             cadena[i] = getch();
-            if(cadena[i] == 32)
-                mostrar = 1;
+            if(cadena[i]>=97 && cadena<=122 || cadena[i]==13 || cadena[i]==32)
+            {
+                printf("%c",cadena[i]);
+                if(cadena[i] == 32)
+                   mostrar = 1;
+            }
+            i++;
         }
         if(mostrar==1)
         {
@@ -60,17 +66,120 @@ void main()
          indice++;
          while(cadena[indice] != 13)
          {
-            numero[k] = cadena[indice]
+            numero[k] = cadena[indice];
             indice++;
             k++;
          }
-         if(numero == 'uno')
+         switch(numero)
          {
-             for(mos;mos<=j;mos++)
-             {
+            case "cero":
+              printf("Problema al mostrar la palabra");
+                 break;
+            case "uno":
+                 for(mos;mos<=j;mos++)
+                 {
                  printf("%c",palabra[mos]);
-             }
-             printf("\n");
-         }         
+                 }
+                 printf("\n");
+                 output_A0(count);
+                 count = 0;
+                 break;
+            case "dos":
+                 for(repe; repe<2; repe++)
+                 {
+                     for(mos;mos<=j;mos++)
+                     {
+                         printf("%c",palabra[mos]);
+                     }
+                     printf("\n");
+                     output_A0(count);
+                     count = 0;
+                 }
+                 break;
+            case "tres":
+                 for(repe; repe<3; repe++)
+                 {
+                     for(mos;mos<=j;mos++)
+                     {
+                         printf("%c",palabra[mos]);
+                     }
+                     printf("\n");
+                     output_A0(count);
+                     count = 0;
+                 }
+                 break;
+            case "cuatro":
+                 for(repe; repe<4; repe++)
+                 {
+                     for(mos;mos<=j;mos++)
+                     {
+                         printf("%c",palabra[mos]);
+                     }
+                     printf("\n");
+                     output_A0(count);
+                     count = 0;
+                 }
+                 break;
+            case "cinco":
+               for(repe; repe<5; repe++)
+                 {
+                     for(mos;mos<=j;mos++)
+                     {
+                         printf("%c",palabra[mos]);
+                     }
+                     printf("\n");
+                     output_A0(count);
+                     count = 0;
+                 }
+                 break;
+           case "seis":
+              for(repe; repe<6; repe++)
+                 {
+                     for(mos;mos<=j;mos++)
+                     {
+                         printf("%c",palabra[mos]);
+                     }
+                     printf("\n");
+                     output_A0(count);
+                     count = 0;
+                 }
+                 break;
+            case "siete":
+              for(repe; repe<7; repe++)
+                 {
+                     for(mos;mos<=j;mos++)
+                     {
+                         printf("%c",palabra[mos]);
+                     }
+                     printf("\n");
+                     output_A0(count);
+                     count = 0;
+                 }
+                 break;
+            case "ocho":
+              for(repe; repe<8; repe++)
+                 {
+                     for(mos;mos<=j;mos++)
+                     {
+                         printf("%c",palabra[mos]);
+                     }
+                     printf("\n");
+                     output_A0(count);
+                     count = 0;
+                 }
+                 break;
+            case "nueve":
+              for(repe; repe<9; repe++)
+                 {
+                     for(mos;mos<=j;mos++)
+                     {
+                         printf("%c",palabra[mos]);
+                     }
+                     printf("\n");
+                     output_A0(count);
+                     count = 0;
+                 }
+                 break;
+         }
     }
 }
